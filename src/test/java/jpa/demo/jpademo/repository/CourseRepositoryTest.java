@@ -18,7 +18,6 @@ class CourseRepositoryTest {
   @Autowired
   private CourseRepository courseRepository;
 
-
   @Test
   void shouldTestFindCourseById() {
     logger.info("Test is running.");
@@ -36,6 +35,7 @@ class CourseRepositoryTest {
   }
 
   @Test
+  @DirtiesContext
   void shouldTestSaveCourseById() {
     Course course = courseRepository.findById(10001L);
     Assertions.assertEquals("JPA1", course.getName());
@@ -46,4 +46,11 @@ class CourseRepositoryTest {
     Course course1 = courseRepository.findById(10001L);
     Assertions.assertEquals("HIBERNATE1", course1.getName());
   }
+
+  @Test
+  @DirtiesContext
+  void shouldPlayWithEntityManager() {
+    courseRepository.playWithEntityManager();
+  }
+
 }
