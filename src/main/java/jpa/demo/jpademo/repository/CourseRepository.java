@@ -24,4 +24,14 @@ public class CourseRepository {
     entityManager.remove(course);
   }
 
+  public Course save(Course course) {
+    if (course.getId() == null) {
+      entityManager.persist(course);
+    } else {
+      entityManager.merge(course);
+    }
+
+    return course;
+  }
+
 }
